@@ -5,4 +5,4 @@ Repositório
 - Recomendação: Netbeans
 - Automato adicionado
 - Fibonacci dinâmico adicionado
-- Pesquisisa adicionado
+- Pesquisa adicionado
