@@ -1,6 +1,8 @@
-RepositÛrio
+Reposit√≥rio
 
-- Essa pasta contÈm projetos em Linguagem Java
+- Essa pasta cont√©m projetos em Linguagem Java
 - Para compilar, utilize uma IDE como o NetBeans ou o Eclipse
-- RecomendaÁ„o: Netbeans
+- Recomenda√ß√£o: Netbeans
 - Automato adicionado
+- Fibonacci din√¢mico adicionado
+- Pesquisisa adicionado
