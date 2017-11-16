@@ -1,6 +1,5 @@
 
 import java.util.Random;
-import java.util.Scanner;
 
 /**
  *
@@ -21,13 +20,10 @@ public class Main {
         vetor1 = new int[10];
         vetor2 = new int[20];
         vetor3 = new int[30];
-       
         
         //Classe Random
         Random random = new Random();
         
-        //Classe Scanner
-        Scanner input = new Scanner(System.in);
         
         //Preenchendo os vetores
         System.out.println("Vetor 1: ");
@@ -35,33 +31,30 @@ public class Main {
             vetor1[i] = random.nextInt(100);
             System.out.print(vetor1[i] + " ");
         }
-        
-        System.out.println("\n");
-       
-   //     System.out.println("\n\n");
-        
-        System.out.println("Vetor 2: ");
-        for(int i = 0; i < 20; i++){
-            vetor2[i] = random.nextInt(100);
-            System.out.print(vetor2[i] + " ");
-        }
-        
-        System.out.println("\n\n");
-        
-        System.out.println("Vetor 3: ");
-        for(int i = 0; i < 30; i++){
-            vetor3[i] = random.nextInt(100);
-            System.out.print(vetor3[i] + " ");
-        } 
+//       
+//        System.out.println("\n\n");
+//        
+//        System.out.println("Vetor 2: ");
+//        for(int i = 0; i < 20; i++){
+//            vetor2[i] = random.nextInt(100);
+//            System.out.print(vetor2[i] + " ");
+//        }
+//        
+//        System.out.println("\n\n");
+//        
+//        System.out.println("Vetor 3: ");
+//        for(int i = 0; i < 30; i++){
+//            vetor3[i] = random.nextInt(100);
+//            System.out.print(vetor3[i] + " ");
+//        }
         
         System.out.println("\n");
         
         //Classe Hash
         Hash hash = new Hash(vetor1, vetor2, vetor3);
         
-        hash.insercaoHash1();
-        hash.insercaoHash2();
-        hash.insercaoHash3();
+        hash.insercaoHash();
+        
         
     }
     
