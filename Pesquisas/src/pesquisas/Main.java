@@ -14,6 +14,8 @@ public class Main {
     static int[] vetor2;
     static int[] vetor3;
     static ArrayList<Integer> numeros;
+    static ArrayList<Integer> numeros2;
+    static ArrayList<Integer> numeros3;
 
 
     public static void main(String[] args) {
@@ -26,8 +28,10 @@ public class Main {
         
         
         
-        //Utilizando um ArrayList para valores aleatórios e eliminação de repetições
+        //Utilizando ArrayLists para valores aleatórios e eliminação de repetições
         numeros = new ArrayList<Integer>();
+        numeros2 = new ArrayList<Integer>();
+        numeros3 = new ArrayList<Integer>();
         
         //Classe Random
         Random random = new Random();
@@ -39,7 +43,7 @@ public class Main {
         boolean conflito = true;
         
         //Preenchendo os vetores
-        System.out.println("Vetor 1: ");
+        System.out.print("Vetor 1: ");
         for(int i = 0; i < 10; i++){
             int rand = random.nextInt(numeros.size());
             vetor1[i] = numeros.get(rand); // Pegar o índice sorteado
@@ -47,27 +51,41 @@ public class Main {
             System.out.print(vetor1[i] + " ");
         }
 //       
-//        System.out.println("\n\n");
-//        
-//        System.out.println("Vetor 2: ");
-//        for(int i = 0; i < 20; i++){
-//            vetor2[i] = random.nextInt(100);
-//            System.out.print(vetor2[i] + " ");
-//        }
-//        
-//        System.out.println("\n\n");
-//        
-//        System.out.println("Vetor 3: ");
-//        for(int i = 0; i < 30; i++){
-//            vetor3[i] = random.nextInt(100);
-//            System.out.print(vetor3[i] + " ");
-//        }
+        System.out.println("\n");
+        
+        for(int i = 0; i < 100; i++){
+            numeros2.add(i);
+        }
+      
+        System.out.print("Vetor 2: ");
+        for(int i = 0; i < 20; i++){
+            int rand = random.nextInt(numeros2.size());
+            vetor2[i] = numeros2.get(rand); // Pegar o índice sorteado
+            numeros2.remove(rand); //Remover índice sorteado
+            System.out.print(vetor2[i] + " ");
+        }
+
+              
+        System.out.println("\n");
+        
+        for(int i = 0; i < 100; i++){
+            numeros3.add(i);
+        }
+        
+        System.out.print("Vetor 3: ");
+        for(int i = 0; i < 30; i++){
+            int rand = random.nextInt(numeros3.size());
+            vetor3[i] = numeros3.get(rand); // Pegar o índice sorteado
+            numeros3.remove(rand); //Remover índice sorteado
+            System.out.print(vetor3[i] + " ");
+        }
         
         System.out.println("\n");
         
         //Classe Hash
         Hash hash = new Hash(vetor1, vetor2, vetor3);
         
+        //Chamada do método para inserção na Hash
         hash.insercaoHash();
         
         
