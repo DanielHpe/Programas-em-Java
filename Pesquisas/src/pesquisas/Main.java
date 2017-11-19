@@ -2,6 +2,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import pesquisas.Menu;
 
 /**
  *
@@ -18,6 +19,10 @@ public class Main {
     static ArrayList<Integer> numeros3;
 
 
+    //Classe Main (Principal)
+    //Cria 3 vetores de 3 tamanhos diferentes (1.000, 5.000, 10.000)
+    //Insere em cada vetor, valores aleatórios de 0 a randomTamanho (Sem repetição de valores)
+    //Após isso, transfere os 3 vetores para a classe Hash para a criação das Hashes
     public static void main(String[] args) {
         // TODO code application logic here
         
@@ -26,9 +31,13 @@ public class Main {
         vetor2 = new int[5000];
         vetor3 = new int[10000];
         
+        //Instanciando Menu
+        Menu menu = new Menu();
+        
         //Valores randômicos de 0 à 100.000
         //Alterar para o número de Random desejado
         int randomTamanho = 100000;
+        int opcao;
         
         //Utilizando ArrayLists para valores aleatórios e eliminação de repetições
         numeros = new ArrayList<>();
@@ -42,7 +51,6 @@ public class Main {
             numeros.add(i); //Adicionando 100 valores no array
         }
         
-        boolean conflito = true;
         
         //Preenchendo os vetores
         System.out.print("Vetor 1: ");
@@ -90,8 +98,20 @@ public class Main {
         //Chamada do método para inserção na Hash
         hash.insercaoHash();
         
-        //Chamada do método de pesquisa de 100 valores randômicos na Hash
-        hash.pesquisaHash();
+        do{
+            opcao = menu.exibirMenu();
+            switch(opcao){
+                case 0:
+                    break;
+                case 1:
+                    hash.pesquisaHash();
+                    break;
+                case 2:
+                    break;
+                default:
+                    System.out.println("Opcao Inválida ! \n");             
+            }
+        } while (opcao != 0);
         
     }
     

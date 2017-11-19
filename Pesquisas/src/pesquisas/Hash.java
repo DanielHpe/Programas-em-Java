@@ -8,7 +8,15 @@ import java.util.Random;
  * @author daniel.pereira
  */
 
-//Testes de Hashes
+//Classe Hash
+//Cada vetor, possui 1 tabela Hash própria. Cujo tamanho é o próximo número primo acima do vetor
+//A inserção dos valores nos vetores é feita através de uma função de Hash e um sistema de detecção de colisões
+//Se detectada uma colisão (inserção de um valor num espaço já ocupado), insere elemento na próxima posição vazia
+//Após a inserção dos valores nas Hashes, é possível se fazer a pesquisa de valores na mesma
+//Pesquisa de 100 valores randômicos de (0 à 100.000) nas Hashes
+//Retorno do número de comparações
+//Retorno do número de valores encontrados na busca
+//Retorno dos valores encontrados na busca
 public class Hash {
     
     public int[] vetor1 = new int[10];
@@ -24,7 +32,7 @@ public class Hash {
     
     public Random random = new Random();
    
-    //Construtor recebe vetores
+    //Construtor recebe vetores e o randomTamanho (valor limite de possibilidades de aleatórios)
     public Hash(int[] vetor1, int[] vetor2, int[] vetor3, int randomTamanho){
         this.vetor1 = vetor1;
         this.vetor2 = vetor2;
@@ -143,11 +151,11 @@ public class Hash {
         
     }
     
-    //Pesquisa de valores na Hash
+    //Pesquisa de 100 valores aleatórios (de 0 à 100.000) nas Hashes
     public void pesquisaHash(){
         
-        int randomValor = 0;
-        int valorBuscado = 0;
+        int randomValor;
+        int valorBuscado;
         int contHash1 = 0;
         int contHash2 = 0;
         int contHash3 = 0;
@@ -155,39 +163,51 @@ public class Hash {
         int numComparacoes2 = 0;
         int numComparacoes3 = 0;
         
+        //ArrayLists que recebem os valores encontrados na Busca
         ArrayList<Integer> valoresEncontradosHash1 = new ArrayList<>();
         ArrayList<Integer> valoresEncontradosHash2 = new ArrayList<>();      
         ArrayList<Integer> valoresEncontradosHash3 = new ArrayList<>();
         
+        //ArrayLists para eliminação de pesquisa de um mesmo valor
         ArrayList<Integer> nums1 = new ArrayList<>();
         ArrayList<Integer> nums2 = new ArrayList<>();
         ArrayList<Integer> nums3 = new ArrayList<>();
         
+        //Arraylist recebe randomTamanho valores em suas randomTamanho posições
         for(int i = 0; i < randomTamanho; i++){
             nums1.add(i);
         }
         
+        //Utilizando o método nanoTime da classe System para obter o tempo de execução da busca
+        long startTime1 = System.nanoTime();
+        
+        //Pesquisa de 100 valores aleatórios
         for(int i = 0; i < 100; i++){
             //Eliminar pesquisa de mesmo valor
             //Gerar sempre um valor de pesquisa diferente
-            randomValor = random.nextInt(nums1.size());
-            valorBuscado = nums1.get(randomValor);
-            nums1.remove(randomValor);
-            for(int j = 0; j < tabelaHash1.length; j++){
-                if(tabelaHash1[j] == valorBuscado){
-                    contHash1++;
-                    numComparacoes1++;
-                    valoresEncontradosHash1.add(tabelaHash1[j]);
+            randomValor = random.nextInt(nums1.size()); //
+            valorBuscado = nums1.get(randomValor); //valor a ser buscado recebe o valor do array no indice (randomValor)
+            nums1.remove(randomValor); //Remover o indice sorteado para eliminar as repetições
+            for(int j = 0; j < tabelaHash1.length; j++){ //Percorrer a Hash em busca do valor desejado
+                if(tabelaHash1[j] == valorBuscado){ //Se a Hash na posição j for igual ao valor randomico buscado
+                    contHash1++; //contador de valores encontrados recebe +1;
+                    numComparacoes1++; //Valor de comparacões recebe +1
+                    valoresEncontradosHash1.add(tabelaHash1[j]); //ArrayList de valores encontrados recebe o valor
                 }
                 else{
-                    numComparacoes1++;
+                    numComparacoes1++; //Valor de comparacoes recebe +1
                 }
             }    
         }
         
+        long timeNano = System.nanoTime() - startTime1;
+        
         for(int i = 0; i < randomTamanho; i++){
             nums2.add(i);
         }
+        
+        //Utilizando o método nanoTime da classe System para obter o tempo de execução da busca
+        long startTime2 = System.nanoTime();
         
         //Pesquisa de 100 valores aleatórios de 0 à 200
         for(int i = 0; i < 100; i++){
@@ -206,10 +226,15 @@ public class Hash {
                 }
             }    
         }
+        
+        long timeNano2 = System.nanoTime() - startTime2;
 
         for(int i = 0; i < randomTamanho; i++){
             nums3.add(i);
         }
+        
+        //Utilizando o método nanoTime da classe System para obter o tempo de execução da busca
+        long startTime3 = System.nanoTime();
                 
         for(int i = 0; i < 100; i++){
             //Eliminar pesquisa de mesmo valor
@@ -227,13 +252,20 @@ public class Hash {
                 }
             }    
         }
+        
+        long timeNano3 = System.nanoTime() - startTime3;
 
+        //Impressão das informações:
+        //Numeros de valores encontrados em cada Hash
+        //Array de valores encontrados em cada Hash
+        //Numero de comparacoes do valor buscado com a posição na Hash de cada Hash
         System.out.println("Foram encontrados " + contHash1 + " valores na pesquisa randômica da Hash 1");
         System.out.print("Valores encontrados na Hash 1: ");
         for(int i = 0; i < valoresEncontradosHash1.size(); i++){
             System.out.print(valoresEncontradosHash1.get(i) + " ");
         }
         System.out.println("\nNumero de comparacoes na Hash 1 é: " + numComparacoes1);
+        System.out.printf("Tempo de execução da busca é: %3.3f milissegundos%n", (double) timeNano / 1000000);
         
         System.out.println("\nForam encontrados " + contHash2 + " valores na pesquisa randômica da Hash 2"); 
         System.out.print("Valores encontrados na Hash 2: ");
@@ -241,6 +273,7 @@ public class Hash {
             System.out.print(valoresEncontradosHash2.get(i) + " ");
         }
         System.out.println("\nNumero de comparacoes na Hash 2 é: " + numComparacoes2);
+        System.out.printf("Tempo de execução da busca é: %3.3f milissegundos%n", (double) timeNano2 / 1000000);
         
         System.out.println("\nForam encontrados " + contHash3 + " valores na pesquisa randômica da Hash 3"); 
         System.out.print("Valores encontrados na Hash 3: ");
@@ -248,7 +281,7 @@ public class Hash {
             System.out.print(valoresEncontradosHash3.get(i) + " ");
         }
         System.out.println("\nNumero de comparacoes na Hash 3 é: " + numComparacoes3);
+        System.out.printf("Tempo de execução da busca é: %3.3f milissegundos%n", (double) timeNano3 / 1000000);
         System.out.println("\n");
     }
-    
 }
