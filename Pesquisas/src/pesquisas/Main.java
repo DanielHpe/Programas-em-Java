@@ -1,7 +1,10 @@
+package pesquisas;
+
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import pesquisas.BinarySearchTree;
 import pesquisas.Menu;
 
 /**
@@ -23,6 +26,7 @@ public class Main {
     //Cria 3 vetores de 3 tamanhos diferentes (1.000, 5.000, 10.000)
     //Insere em cada vetor, valores aleatórios de 0 a randomTamanho (Sem repetição de valores)
     //Após isso, transfere os 3 vetores para a classe Hash para a criação das Hashes
+    //Após isso, transfere os 3 vetores para a classe BinarySearchTree para a criação das ávores
     public static void main(String[] args) {
         // TODO code application logic here
         
@@ -95,8 +99,14 @@ public class Main {
         //Classe Hash
         Hash hash = new Hash(vetor1, vetor2, vetor3, randomTamanho);
         
+        //Classe Binary Search Tree
+        BinarySearchTree bst = new BinarySearchTree(vetor1, vetor2, vetor3, randomTamanho); 
+        
         //Chamada do método para inserção na Hash
         hash.insercaoHash();
+        
+        //Chamada do método para inserção nas árvores binárias
+        bst.dados();
         
         do{
             opcao = menu.exibirMenu();
@@ -107,6 +117,7 @@ public class Main {
                     hash.pesquisaHash();
                     break;
                 case 2:
+                    bst.pesquisaBinaria();
                     break;
                 default:
                     System.out.println("Opcao Inválida ! \n");             
