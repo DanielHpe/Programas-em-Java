@@ -195,6 +195,7 @@ public class Hash {
                     contHash1++; //contador de valores encontrados recebe +1;
                     numComparacoes1++; //Valor de comparacões recebe +1
                     valoresEncontradosHash1.add(tabelaHash1[j]); //ArrayList de valores encontrados recebe o valor
+                    break;
                 }
                 else{
                     numComparacoes1++; //Valor de comparacoes recebe +1
@@ -223,6 +224,7 @@ public class Hash {
                     contHash2++;
                     numComparacoes2++;
                     valoresEncontradosHash2.add(tabelaHash2[j]);
+                    break;
                 } else {
                     numComparacoes2++;
                 }
@@ -249,6 +251,7 @@ public class Hash {
                     contHash3++;
                     numComparacoes3++;
                     valoresEncontradosHash3.add(tabelaHash3[j]);
+                    break;
                 } else {
                     numComparacoes3++;
                 }
