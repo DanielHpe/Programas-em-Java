@@ -10,6 +10,8 @@ package pesquisas;
  * @author daniel.pereira
  */
 
+//Classe Node
+//Contém os nós (Valor (data), Esquerdo e Direito)
 public class Node {
     
     int data;
