@@ -84,6 +84,7 @@ public class BinarySearchTree {
         for(int i = 0; i < 100; i++){
              //Eliminar pesquisa de mesmo valor
             //Gerar sempre um valor de pesquisa diferente
+            current1 = root1;
             randomValor = random.nextInt(nums1.size()); //
             valorBuscado = nums1.get(randomValor); //valor a ser buscado recebe o valor do array no indice (randomValor)
             nums1.remove(randomValor); //Remover o indice sorteado para eliminar as repetições
@@ -91,11 +92,14 @@ public class BinarySearchTree {
                 if(current1.data == valorBuscado){ //Se encontrar
                     contArvore1++; //contador de valores encontrados recebe +1;
                     numComparacoes1++; //Valor de comparacões recebe +1
-                //    valoresEncontradosArvore1.add(current1.data); //ArrayList de valores encontrados recebe o valor
+                    valoresEncontradosArvore1.add(valorBuscado); //ArrayList de valores encontrados recebe o valor
+                    break;
                 }else if(current1.data > valorBuscado){ //Se o campo data de Current for maior que o valor buscado
                     current1 = current1.left; //Current recebe seu nó esquerdo (Node esquerdo)
+                    numComparacoes1++;
                 }else{ //Senão for maior, for menor
                     current1 = current1.right; //Current recebe seu nó direito
+                    numComparacoes1++;
             }
         }}
         
@@ -106,10 +110,12 @@ public class BinarySearchTree {
         
         //Node current percorre toda a árvore
         //Current recebe primariamente a raíz, para percorre-la
+        
         Node current2 = root2;
         for(int i = 0; i < 100; i++){
              //Eliminar pesquisa de mesmo valor
             //Gerar sempre um valor de pesquisa diferente
+            current2 = root2;
             randomValor = random.nextInt(nums2.size()); //
             valorBuscado = nums2.get(randomValor); //valor a ser buscado recebe o valor do array no indice (randomValor)
             nums2.remove(randomValor); //Remover o indice sorteado para eliminar as repetições
@@ -117,11 +123,14 @@ public class BinarySearchTree {
                 if(current2.data == valorBuscado){ //Se encontrar
                     contArvore2++; //contador de valores encontrados recebe +1;
                     numComparacoes2++; //Valor de comparacões recebe +1
-                //    valoresEncontradosArvore2.add(current2.data); //ArrayList de valores encontrados recebe o valor
+                    valoresEncontradosArvore2.add(valorBuscado); //ArrayList de valores encontrados recebe o valor
+                    break;
                 }else if(current2.data > valorBuscado){ //Se o campo data de Current for maior que o valor buscado
                     current2 = current2.left; //Current recebe seu nó esquerdo (Node esquerdo)
+                    numComparacoes2++;
                 }else{ //Senão for maior, for menor
                     current2 = current2.right; //Current recebe seu nó direito
+                    numComparacoes2++;
             }
         }}
         
@@ -136,6 +145,7 @@ public class BinarySearchTree {
         for(int i = 0; i < 100; i++){
              //Eliminar pesquisa de mesmo valor
             //Gerar sempre um valor de pesquisa diferente
+            current3 = root3;
             randomValor = random.nextInt(nums3.size()); //
             valorBuscado = nums3.get(randomValor); //valor a ser buscado recebe o valor do array no indice (randomValor)
             nums3.remove(randomValor); //Remover o indice sorteado para eliminar as repetições
@@ -143,11 +153,14 @@ public class BinarySearchTree {
                 if(current3.data == valorBuscado){ //Se encontrar
                     contArvore3++; //contador de valores encontrados recebe +1;
                     numComparacoes3++; //Valor de comparacões recebe +1
-                //    valoresEncontradosArvore3.add(current3.data); //ArrayList de valores encontrados recebe o valor
+                    valoresEncontradosArvore3.add(valorBuscado); //ArrayList de valores encontrados recebe o valor
+                    break;
                 }else if(current3.data > valorBuscado){ //Se o campo data de Current for maior que o valor buscado
                     current3 = current3.left; //Current recebe seu nó esquerdo (Node esquerdo)
+                    numComparacoes2++;
                 }else{ //Senão for maior, for menor
                     current3 = current3.right; //Current recebe seu nó direito
+                    numComparacoes2++;
             }
         }}
         
@@ -159,25 +172,25 @@ public class BinarySearchTree {
         //Numero de comparacoes do valor buscado com a posição na Arvore de cada Arvore (1, 2 e 3)
         System.out.println("Foram encontrados " + contArvore1 + " valores na pesquisa randômica da Arvore 1");
         System.out.print("Valores encontrados na Arvore 1: ");
-//        for(int i = 0; i < valoresEncontradosArvore1.size(); i++){
-//            System.out.print(valoresEncontradosArvore1.get(i) + " ");
-//        }
+        for(int i = 0; i < valoresEncontradosArvore1.size(); i++){
+            System.out.print(valoresEncontradosArvore1.get(i) + " ");
+        }
         System.out.println("\nNumero de comparacoes na Arvore 1 é: " + numComparacoes1);
         System.out.printf("Tempo de execução da busca é: %3.3f milissegundos%n", (double) timeNano / 1000000);
         
         System.out.println("\nForam encontrados " + contArvore2 + " valores na pesquisa randômica da Arvore 2"); 
         System.out.print("Valores encontrados na Arvore 2: ");
-//        for(int i = 0; i < valoresEncontradosArvore2.size(); i++){
-//            System.out.print(valoresEncontradosArvore2.get(i) + " ");
-//        }
+        for(int i = 0; i < valoresEncontradosArvore2.size(); i++){
+            System.out.print(valoresEncontradosArvore2.get(i) + " ");
+        }
         System.out.println("\nNumero de comparacoes na Arvore 2 é: " + numComparacoes2);
         System.out.printf("Tempo de execução da busca é: %3.3f milissegundos%n", (double) timeNano2 / 1000000);
         
         System.out.println("\nForam encontrados " + contArvore3 + " valores na pesquisa randômica da Arvore 3"); 
         System.out.print("Valores encontrados na Arvore 3: ");
-//        for(int i = 0; i < valoresEncontradosArvore3.size(); i++){
-//            System.out.print(valoresEncontradosArvore3.get(i) + " ");
-//        }
+        for(int i = 0; i < valoresEncontradosArvore3.size(); i++){
+            System.out.print(valoresEncontradosArvore3.get(i) + " ");
+        }
         System.out.println("\nNumero de comparacoes na Arvore 3 é: " + numComparacoes3);
         System.out.printf("Tempo de execução da busca é: %3.3f milissegundos%n", (double) timeNano3 / 1000000);
         System.out.println("\n");
