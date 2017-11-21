@@ -196,89 +196,6 @@ public class BinarySearchTree {
         System.out.println("\n");
 
     }
-//    
-//    public boolean delete(int id){
-//        Node parent = root;
-//        Node current = root;
-//        boolean isLeftChild = false;
-//        while(current.data!=id){
-//            parent = current;
-//            if(current.data>id){
-//                    isLeftChild = true;
-//                    current = current.left;
-//            }else{
-//                    isLeftChild = false;
-//                    current = current.right;
-//            }
-//            if(current ==null){
-//                    return false;
-//            }
-//        }
-//        //if i am here that means we have found the node
-//        //Case 1: if node to be deleted has no children
-//        if(current.left==null && current.right==null){
-//            if(current==root){
-//                    root = null;
-//            }
-//            if(isLeftChild ==true){
-//                    parent.left = null;
-//            }else{
-//                    parent.right = null;
-//            }
-//        }
-//        
-//        //Case 2 : if node to be deleted has only one child
-//        else if(current.right==null){
-//            if(current==root){
-//                    root = current.left;
-//            }else if(isLeftChild){
-//                    parent.left = current.left;
-//            }else{
-//                    parent.right = current.left;
-//            }
-//        }
-//        else if(current.left==null){
-//            if(current==root){
-//                    root = current.right;
-//            }else if(isLeftChild){
-//                    parent.left = current.right;
-//            }else{
-//                    parent.right = current.right;
-//            }
-//        }else if(current.left!=null && current.right!=null){
-//
-//            //now we have found the minimum element in the right sub tree
-//            Node successor	 = getSuccessor(current);
-//            if(current==root){
-//                    root = successor;
-//            }else if(isLeftChild){
-//                    parent.left = successor;
-//            }else{
-//                    parent.right = successor;
-//            }			
-//            successor.left = current.left;
-//        }		
-//        return true;		
-//    }
-
-//    public Node getSuccessor(Node deleleNode){
-//        Node successsor =null;
-//        Node successsorParent =null;
-//        Node current = deleleNode.right;
-//        while(current!=null){
-//                successsorParent = successsor;
-//                successsor = current;
-//                current = current.left;
-//        }
-//        //check if successor has the right child, it cannot have left child for sure
-//        // if it does have the right child, add it to the left of successorParent.
-////		successsorParent
-//        if(successsor!=deleleNode.right){
-//            successsorParent.left = successsor.right;
-//            successsor.right = deleleNode.right;
-//        }
-//        return successsor;
-//    }
     
     public void insert(int id){
         Node newNode = new Node(id);
@@ -395,6 +312,7 @@ public class BinarySearchTree {
     
     public void dados(){
         
+        //Dados de teste p/ Arvore de teste (Poucos nós)
         this.insert(3);this.insert(8);
         this.insert(1);this.insert(4);this.insert(6);this.insert(2);this.insert(10);this.insert(9);
         this.insert(20);this.insert(25);this.insert(15);this.insert(16);
@@ -414,9 +332,9 @@ public class BinarySearchTree {
             this.insertVetor3(vetor3[i]);
         }   
         
-        System.out.print("Árvore de Teste:");
-        this.display(this.root);
-        System.out.println("\n");
+//        System.out.print("Árvore de Teste:");
+//        this.display(this.root);
+//        System.out.println("\n");
         
         System.out.print("Árvore 1:");
         this.display(this.root1);
@@ -427,16 +345,7 @@ public class BinarySearchTree {
         System.out.print("Árvore 3:");
         this.display(this.root3);
         System.out.println("\n");
-        
         System.out.println("");
- //       System.out.println("Check whether Node with value 4 exists : " + this.pesquisaBinaria());
-//        System.out.println("Delete Node with no children (2) : " + b.delete(2));		
-//        b.display(root);
-//        System.out.println("\n Delete Node with one child (4) : " + b.delete(4));		
-//        b.display(root);
-//        System.out.println("\n Delete Node with Two children (10) : " + b.delete(10));		
-//        b.display(root);
-//        System.out.println("\n");
 
     }
 }

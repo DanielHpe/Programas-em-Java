@@ -25,12 +25,17 @@ public class Hash {
     public int[] vetor2;
     public int[] vetor3;
     
-    public int[] tabelaHash1 = new int[1001];
-    public int[] tabelaHash2 = new int[5003];
-    public int[] tabelaHash3 = new int[10001];
+    public int[] tabelaHash1;
+    public int[] tabelaHash2;
+    public int[] tabelaHash3;
     
     public int h;
     public int randomTamanho;
+    
+    //Tamanhos das hashes
+    int num1;
+    int num2;
+    int num3;
     
     public Random random = new Random();
    
@@ -42,8 +47,61 @@ public class Hash {
         this.randomTamanho = randomTamanho;
     }
     
+    //Calcula Tamanho da HASH
+    //Tamanho da Hash deve ser o próximo número primo acima do tamanho do vetor
     public void calculaTamanhoHash(){
         
+        boolean verificador = false;
+        
+        num1 = vetor1.length - 1;
+        num2 = vetor2.length - 1;
+        num3 = vetor3.length - 1;
+        
+        while(verificador == false){
+            num1++;
+            for(int i=2;i<num1;i++) {
+                if(num1%i == 0){
+                    verificador = false;
+                    break;
+                } else {
+                    verificador = true;
+                }
+            }    
+        }
+        
+        verificador = false;
+                
+        while(verificador == false){
+            num2++;
+            for(int i=2;i<num2;i++) {
+                if(num2%i == 0){
+                    verificador = false;
+                    break;
+                } else {
+                    verificador = true;
+                }
+            }    
+        }
+        
+        verificador = false;
+        
+        while(verificador == false){
+            num3++;
+            for(int i=2;i<num3;i++) {
+                if(num3%i == 0){
+                    verificador = false;
+                    break;
+                } else {
+                    verificador = true;
+                }
+            }    
+        }
+        
+//        System.out.print("Proximo primo de vetor 1: " + num1);
+//        System.out.print("\nProximo primo de vetor 2: " + num2);
+//        System.out.print("\nProximo primo de vetor 3: " + num3);
+//        System.out.println("\n\n");
+    
     }
     
     //Método de inserção dos dados do Vetor 1 na HASH
@@ -51,8 +109,17 @@ public class Hash {
     //Detecção de colisões também implementada, caso a posição esteja ocupada, insere-se elemento no próximo campo vazio
     public void insercaoHash(){
         
+             
         int auxiliar; 
         int j;
+        
+        this.calculaTamanhoHash();
+        
+        //Instanciando Hashes com tamanhos compatíveis
+        //Tamanhos das Hashes são os valores primos calculados da função calculaTamanhoHash
+        tabelaHash1 = new int[num1];
+        tabelaHash2 = new int[num2];
+        tabelaHash3 = new int[num3];
           
         for(int i = 0; i < tabelaHash1.length; i++){
             tabelaHash1[i] = -1; //Todos os valores da Hash recebem -1 pra indicar campo vazio 
