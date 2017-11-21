@@ -12,6 +12,8 @@ import java.util.Scanner;
  * @author daniel.pereira
  */
 
+//Classe Menu
+//Contém o Menu de Buscas (Árvore de Pesquisa binária e Hash)
 public class Menu {
     
     int opcao;
