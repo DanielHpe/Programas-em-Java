@@ -20,6 +20,11 @@ public class Main {
     static ArrayList<Integer> numeros;
     static ArrayList<Integer> numeros2;
     static ArrayList<Integer> numeros3;
+    
+    static int[] vetorTeste1;
+    static int[] vetorTeste2;
+    static int[] vetorTeste3;
+    
 
 
     //Classe Main (Principal)
@@ -35,12 +40,13 @@ public class Main {
         vetor2 = new int[5000];
         vetor3 = new int[10000];
         
+        
         //Instanciando Menu
         Menu menu = new Menu();
         
         //Valores randômicos de 0 à 100.000
         //Alterar para o número de Random desejado
-        int randomTamanho = 100000;
+        int randomTamanho = 20000;
         int opcao;
         
         //Utilizando ArrayLists para valores aleatórios e eliminação de repetições
