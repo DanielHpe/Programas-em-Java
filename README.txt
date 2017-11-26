@@ -6,3 +6,6 @@ Repositório
 - Automato adicionado
 - Fibonacci dinâmico adicionado
 - Pesquisa adicionado
+- Calcula Primo adicionado
+- TimeToLoop adicionado
+- Ordenação adicionado
