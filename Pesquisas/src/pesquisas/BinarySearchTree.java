@@ -175,7 +175,7 @@ public class BinarySearchTree {
         for(int i = 0; i < valoresEncontradosArvore1.size(); i++){
             System.out.print(valoresEncontradosArvore1.get(i) + " ");
         }
-        System.out.println("\nNumero de comparacoes na Arvore 1 é: " + numComparacoes1);
+        System.out.println("\nNúmero de comparações na Arvore 1 é: " + numComparacoes1);
         System.out.printf("Tempo de execução da busca é: %3.3f milissegundos%n", (double) timeNano / 1000000);
         
         System.out.println("\nForam encontrados " + contArvore2 + " valores na pesquisa randômica da Arvore 2"); 
@@ -183,7 +183,7 @@ public class BinarySearchTree {
         for(int i = 0; i < valoresEncontradosArvore2.size(); i++){
             System.out.print(valoresEncontradosArvore2.get(i) + " ");
         }
-        System.out.println("\nNumero de comparacoes na Arvore 2 é: " + numComparacoes2);
+        System.out.println("\nNúmero de comparações na Árvore 2 é: " + numComparacoes2);
         System.out.printf("Tempo de execução da busca é: %3.3f milissegundos%n", (double) timeNano2 / 1000000);
         
         System.out.println("\nForam encontrados " + contArvore3 + " valores na pesquisa randômica da Arvore 3"); 
@@ -191,7 +191,7 @@ public class BinarySearchTree {
         for(int i = 0; i < valoresEncontradosArvore3.size(); i++){
             System.out.print(valoresEncontradosArvore3.get(i) + " ");
         }
-        System.out.println("\nNumero de comparacoes na Arvore 3 é: " + numComparacoes3);
+        System.out.println("\nNúmero de comparações na Árvore 3 é: " + numComparacoes3);
         System.out.printf("Tempo de execução da busca é: %3.3f milissegundos%n", (double) timeNano3 / 1000000);
         System.out.println("\n");
 

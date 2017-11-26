@@ -336,7 +336,7 @@ public class Hash {
         for(int i = 0; i < valoresEncontradosHash1.size(); i++){
             System.out.print(valoresEncontradosHash1.get(i) + " ");
         }
-        System.out.println("\nNumero de comparacoes na Hash 1 é: " + numComparacoes1);
+        System.out.println("\nNúmero de comparações na Hash 1 é: " + numComparacoes1);
         System.out.printf("Tempo de execução da busca é: %3.3f milissegundos%n", (double) timeNano / 1000000);
         
         System.out.println("\nForam encontrados " + contHash2 + " valores na pesquisa randômica da Hash 2"); 
@@ -344,7 +344,7 @@ public class Hash {
         for(int i = 0; i < valoresEncontradosHash2.size(); i++){
             System.out.print(valoresEncontradosHash2.get(i) + " ");
         }
-        System.out.println("\nNumero de comparacoes na Hash 2 é: " + numComparacoes2);
+        System.out.println("\nNúmero de comparações na Hash 2 é: " + numComparacoes2);
         System.out.printf("Tempo de execução da busca é: %3.3f milissegundos%n", (double) timeNano2 / 1000000);
         
         System.out.println("\nForam encontrados " + contHash3 + " valores na pesquisa randômica da Hash 3"); 
@@ -352,7 +352,7 @@ public class Hash {
         for(int i = 0; i < valoresEncontradosHash3.size(); i++){
             System.out.print(valoresEncontradosHash3.get(i) + " ");
         }
-        System.out.println("\nNumero de comparacoes na Hash 3 é: " + numComparacoes3);
+        System.out.println("\nNúmero de comparações na Hash 3 é: " + numComparacoes3);
         System.out.printf("Tempo de execução da busca é: %3.3f milissegundos%n", (double) timeNano3 / 1000000);
         System.out.println("\n");
     }
