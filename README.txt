@@ -9,3 +9,5 @@ Repositório
 - Calcula Primo adicionado
 - TimeToLoop adicionado
 - Ordenação adicionado
+- Hash adicionado
+- Árvore Trie adicionado
