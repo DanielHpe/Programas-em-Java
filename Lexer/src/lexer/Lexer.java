@@ -309,18 +309,14 @@ public class Lexer {
                         estado = 25;
                         return new Token(Tag.LIT, lexema.toString(), n_line, n_column);
                     }
-                    else if (lookahead == END_OF_FILE) {
-                        sinalizaErro("String deve ser fechada com \" antes do fim de arquivo");
-			return new Token(Tag.EOF, "EOF", n_line, n_column);
-                    }
-                    else { // Se vier outro, permanece no estado 24
-                        if(c == '\n'){
-                            n_line++;
-                            n_column = 1;
-                        }
-                        if (c != '\n' && c != '\r' && c != '\t'){
-                            lexema.append(c);
-                        }
+                    else if (c == '\n') {
+                        n_line++;
+                        n_column = 1;
+                        sinalizaErro("String deve ser fechada com \" antes da quebra de linha");
+                        lexema.setLength(0);
+			estado = 1;
+                    } else { // Se vier outro, permanece no estado 24
+                        lexema.append(c);
                     }
                     break;
                 case 26:
@@ -386,7 +382,7 @@ public class Lexer {
             // Imprime token
 	    if(token != null ) {
                 
-                System.out.println("Token: " + token.toString() + "\t Linha: " + n_line + "\t Coluna: " + n_column);
+                System.out.println("Token: " + token.toString() + "\t\t Linha: " + n_line + "\t Coluna: " + n_column);
                 
                 resultado += "Token: " + token.toString() + "\n";
                 
