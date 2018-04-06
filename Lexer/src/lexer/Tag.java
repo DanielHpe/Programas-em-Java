@@ -51,11 +51,5 @@ public enum Tag {
     // palavra reservada
     KW,
     
-    //Comentário de 1 Linha // (NÃO É TOKEN)
-    comentarioLinha,
-    
-    //Comentário Extenso // (NÃO É TOKEN)
-    comentarioExtenso
-    
       
 }

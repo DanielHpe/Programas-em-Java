@@ -13,7 +13,7 @@ program TestePasc1
 
 		if(varchar1 == varchar2){
 			varnum1 = varnum2;
-			varnum2 = 3 * v@rnum1;
+			varnum2 = 3 * varnum1;
 		}
 
 
@@ -26,15 +26,18 @@ program TestePasc1
 		
 
 		while(varnum1 >= varnum2){
-			varchar1 = "Programa Teste"; 
-			varchar2 = "Linguagem PasC";
-		}
+			varchar1 = "Programa Teste;" 
+			varchar2 = "Linguagem PasC;"
+			varchar3 = 'c';
+		} 
 
 		read varchar3; 
 
-	
+		// Comentário de uma linha 
 
-		!= 
+	
+		!=
+	
 
 		write "Fim do Programa Pasc";
 

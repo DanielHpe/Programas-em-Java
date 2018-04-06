@@ -16,7 +16,7 @@ public class Lexer {
     private static final int END_OF_FILE = -1; // contante para fim do arquivo
     private static int lookahead = 0; // armazena o último caractere lido do arquivo	
     public static int n_line = 1; // contador de linhas
-    public static int n_column = 1; // contador de linhas
+    public static int n_column = -1; // contador de linhas
     private RandomAccessFile instance_file; // referencia para o arquivo
     private static TS tabelaSimbolos; // tabela de simbolos
     
@@ -55,7 +55,7 @@ public class Lexer {
     public void sinalizaErro(String mensagem) {
         System.out.println("[Erro Lexico]: " + mensagem + "\n");
         resultado += "[Erro Lexico]: " + mensagem + "\n";
-        resultadoLinhasColunas += " Linha: " + n_line + " Coluna: " + n_column + "\n";
+        resultadoLinhasColunas += "Linha: " + n_line + " Coluna: " + n_column + "\n";
     }
     
     //Volta uma posição do buffer de leitura
@@ -71,6 +71,36 @@ public class Lexer {
             System.out.println("Falha ao retornar a leitura\n" + e);
             System.exit(4);
         }
+    }
+    
+        //Volta uma posição do buffer de leitura
+    public void retornaPonteiro2(){
+
+        try {
+            // Não é necessário retornar o ponteiro em caso de Fim de Arquivo
+            if (lookahead != END_OF_FILE) {
+                instance_file.seek(instance_file.getFilePointer() - 2);
+            }    
+        }
+        catch(IOException e) {
+            System.out.println("Falha ao retornar a leitura\n" + e);
+            System.exit(4);
+        }
+    }
+    
+    public void avancaPonteiro(){
+        
+        try {
+            // Não é necessário retornar o ponteiro em caso de Fim de Arquivo
+            if (lookahead != END_OF_FILE) {
+                instance_file.seek(instance_file.getFilePointer() + 1);
+            }    
+        }
+        catch(IOException e) {
+            System.out.println("Falha ao retornar a leitura\n" + e);
+            System.exit(4);
+        }
+        
     }
     
     /* TODO:
@@ -90,6 +120,7 @@ public class Lexer {
 	StringBuilder lexema = new StringBuilder();
 	int estado = 1;
 	char c;
+        char character = '\'' ;//tem um apostrofo com um escape entre os dois apostrofos
 		
 	while(true) {
             c = '\u0000'; // null char
@@ -117,7 +148,7 @@ public class Lexer {
                         // Permance no estado = 1
                         if(c == '\n')  {
                             n_line++;
-                            n_column = 1;
+                            n_column = -1;
                         }
                         else if(c == '\t') {
                            n_column += 3;
@@ -184,8 +215,9 @@ public class Lexer {
                     }
                     else if(c == '"') {
                         estado = 24;
-                    }                    
-                    else {
+                    } else if ( (int) c == 39) {
+                        estado = 36; 
+                    }   else {
                         sinalizaErro("Caractere invalido " + c + " na linha " + n_line + " e coluna " + n_column); 
                     }
                     break;
@@ -205,10 +237,10 @@ public class Lexer {
                     }
                     else {
                         sinalizaErro("Token incompleto para o caractere ! na linha " + n_line + " e coluna " + n_column);
-                        lexema.append(c);
-                        return null;
-
+                        avancaPonteiro();
+                        estado = 1;
                     }
+                    break;
                 case 6:
                     if (c == '=') { // Estado 7
                         estado = 7;
@@ -273,11 +305,8 @@ public class Lexer {
                     break;
                 case 17:
                     if (c == '\n') {
-                        estado = 34;
-                        return new Token(Tag.comentarioLinha, "Comentário", n_line, n_column);
-                    } else {
-                        lexema.append(c); 
-                    }
+                        estado = 1;
+                    } 
                     // Se vier outro, permanece no estado 17
                     break;
                     
@@ -288,30 +317,21 @@ public class Lexer {
                         n_line++;
                     } else if (lookahead == END_OF_FILE) {
                         sinalizaErro("Comentário deve ser fechado com */ antes do fim do arquivo");
-                        return null;
-                    } else {
-                        lexema.append(c);
+                        return new Token(Tag.EOF, "EOF", n_line, n_column);
                     }
                     break;
                 case 19:
                     if(c == '/'){
-                        estado = 20;
+                        estado = 1;
                     } else if(c == '\n'){
                        n_line++; 
                     } else if (lookahead == END_OF_FILE) {
                         sinalizaErro("Comentário deve ser fechado com */ antes do fim do arquivo");
-                        return null;
-                    }
-                    else if(c == '*') {
+                        return new Token(Tag.EOF, "EOF", n_line, n_column);
+                    } else if(c == '*') {
                         estado = 19;
-                    } else {
-                        lexema.append(c);
                     }
                     break;
-                case 20:
-                    estado = 21;
-                    // Não é Token, mas é retornado para reiniciar o loop
-                    return new Token(Tag.comentarioExtenso, "Comentário", n_line, n_column);  
                 case 24:
                     if (c == '"') {
                         estado = 25;
@@ -319,10 +339,12 @@ public class Lexer {
                     }
                     else if (lookahead == END_OF_FILE) {
                         sinalizaErro("String deve ser fechada com \" antes do fim de arquivo");
-			return null;
+			return new Token(Tag.EOF, "EOF", n_line, n_column);
                     }
                     else { // Se vier outro, permanece no estado 24
-                        lexema.append(c);
+                        if (c != '\n' && c != '\r' && c != '\t'){
+                            lexema.append(c);
+                        }
                     }
                     break;
                 case 26:
@@ -332,7 +354,8 @@ public class Lexer {
                     }
                     else {
                         sinalizaErro("Padrao para double invalido na linha " + n_line + " coluna " + n_column);
-			return null;
+                        retornaPonteiro();
+                        return new Token(Tag.num_const, lexema.toString().replace(".", "") , n_line, n_column);
                     }
                     break;
                 case 27:
@@ -343,6 +366,26 @@ public class Lexer {
                         retornaPonteiro();						
 			return new Token(Tag.num_const, lexema.toString(), n_line, n_column);
                     }
+                    break;
+                case 36:
+                    lexema.append(c);
+                    estado = 37;
+                    break;
+                case 37:
+                    if((int) c == 39){
+                        estado = 40;
+                        return new Token(Tag.char_const, lexema.toString().substring(0,1), n_line, n_column);
+                    } else{                        
+                        if (c != ' ' && c != '\n' && c != '\r' && c != '\t'){
+                            sinalizaErro("Erro Léxico! Esperado: \'. Encontrado: " + c); 
+                        }
+                        estado = 37; 
+                        if(lookahead == END_OF_FILE){
+                            return new Token(Tag.EOF, "EOF", n_line, n_column);
+                        }
+                    } 
+                    break;
+                    
             }
 
         }
@@ -364,7 +407,7 @@ public class Lexer {
             token = proxToken();
             
             // Imprime token
-	    if(token != null && token.getClasse() != Tag.comentarioExtenso && token.getClasse() != Tag.comentarioLinha) {
+	    if(token != null ) {
                 
                 System.out.println("Token: " + token.toString() + "\t Linha: " + n_line + "\t Coluna: " + n_column);
                 

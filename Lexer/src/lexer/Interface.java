@@ -186,6 +186,8 @@ public class Interface extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         JFileChooser chooser = new JFileChooser();
+        File workingDirectory = new File(System.getProperty("user.dir"));
+        chooser.setCurrentDirectory(workingDirectory);
         chooser.showOpenDialog(null);
         File f = chooser.getSelectedFile();
         filePath = f.getAbsolutePath();
