@@ -73,35 +73,7 @@ public class Lexer {
         }
     }
     
-        //Volta uma posição do buffer de leitura
-    public void retornaPonteiro2(){
 
-        try {
-            // Não é necessário retornar o ponteiro em caso de Fim de Arquivo
-            if (lookahead != END_OF_FILE) {
-                instance_file.seek(instance_file.getFilePointer() - 2);
-            }    
-        }
-        catch(IOException e) {
-            System.out.println("Falha ao retornar a leitura\n" + e);
-            System.exit(4);
-        }
-    }
-    
-    public void avancaPonteiro(){
-        
-        try {
-            // Não é necessário retornar o ponteiro em caso de Fim de Arquivo
-            if (lookahead != END_OF_FILE) {
-                instance_file.seek(instance_file.getFilePointer() + 1);
-            }    
-        }
-        catch(IOException e) {
-            System.out.println("Falha ao retornar a leitura\n" + e);
-            System.exit(4);
-        }
-        
-    }
     
     /* TODO:
     //[1]   Voce devera se preocupar quando incremetar as linhas e colunas,
@@ -237,7 +209,6 @@ public class Lexer {
                     }
                     else {
                         sinalizaErro("Token incompleto para o caractere ! na linha " + n_line + " e coluna " + n_column);
-                        avancaPonteiro();
                         estado = 1;
                     }
                     break;
@@ -325,6 +296,7 @@ public class Lexer {
                         estado = 1;
                     } else if(c == '\n'){
                        n_line++; 
+                       n_column = 1;
                     } else if (lookahead == END_OF_FILE) {
                         sinalizaErro("Comentário deve ser fechado com */ antes do fim do arquivo");
                         return new Token(Tag.EOF, "EOF", n_line, n_column);
@@ -342,6 +314,10 @@ public class Lexer {
 			return new Token(Tag.EOF, "EOF", n_line, n_column);
                     }
                     else { // Se vier outro, permanece no estado 24
+                        if(c == '\n'){
+                            n_line++;
+                            n_column = 1;
+                        }
                         if (c != '\n' && c != '\r' && c != '\t'){
                             lexema.append(c);
                         }
@@ -377,7 +353,7 @@ public class Lexer {
                         return new Token(Tag.char_const, lexema.toString().substring(0,1), n_line, n_column);
                     } else{                        
                         if (c != ' ' && c != '\n' && c != '\r' && c != '\t'){
-                            sinalizaErro("Erro Léxico! Esperado: \'. Encontrado: " + c); 
+                            sinalizaErro("Esperado: \'. Encontrado: " + c); 
                         }
                         estado = 37; 
                         if(lookahead == END_OF_FILE){
@@ -399,6 +375,7 @@ public class Lexer {
 	Token token;
         tabelaSimbolos = new TS();
         
+        n_column = 1;
         n_line = 1;
 
 	// Enquanto não houver erros ou não for fim de arquivo:
