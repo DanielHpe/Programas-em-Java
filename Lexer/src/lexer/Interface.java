@@ -27,17 +27,22 @@ public class Interface extends javax.swing.JFrame {
     public String fileName = "";
     public String filePath = "";
     public TS tabelaSimbolos;
-    
-    
-    
+        
     // metodo executar
     public void executar(String filePath) throws Exception { 
-     
-        int cont = 0;     
+       
+        Lexer lexer = new Lexer(tabelaSimbolos, filePath);
         
-        Lexer lexer = new Lexer(filePath);
-        
+        // Analise Léxica
         lexer.leituraArquivoToken(textArea1, textArea2);
+        
+        // Novo Lexer para a Análise Sintática (Reinicio da leitura do Arquivo
+        Lexer newlexer = new Lexer(tabelaSimbolos, filePath);
+         
+        // Análise Sintática
+        Parser parser = new Parser(newlexer, textArea1, textArea2, textArea3);
+        
+        parser.nonRecursiveParser();
         
     }
     
@@ -58,17 +63,35 @@ public class Interface extends javax.swing.JFrame {
     private void initComponents() {
 
         jRadioButton1 = new javax.swing.JRadioButton();
+        jInternalFrame1 = new javax.swing.JInternalFrame();
         btnAnexar = new javax.swing.JButton();
-        lb_entrada = new javax.swing.JLabel();
-        lb_analiseLexica = new javax.swing.JLabel();
         btnLimpar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         textArea1 = new javax.swing.JTextArea();
         btnAnalisar1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         textArea2 = new javax.swing.JTextArea();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        textArea3 = new javax.swing.JTextArea();
+        lb_entrada1 = new javax.swing.JLabel();
+        lb_analiseLexica1 = new javax.swing.JLabel();
+        lb_entrada2 = new javax.swing.JLabel();
+        lb_entrada3 = new javax.swing.JLabel();
 
         jRadioButton1.setText("jRadioButton1");
+
+        jInternalFrame1.setVisible(true);
+
+        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
+        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
+        jInternalFrame1Layout.setHorizontalGroup(
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jInternalFrame1Layout.setVerticalGroup(
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -81,22 +104,6 @@ public class Interface extends javax.swing.JFrame {
                 btnAnexarActionPerformed(evt);
             }
         });
-
-        lb_entrada.setBackground(new java.awt.Color(51, 153, 0));
-        lb_entrada.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        lb_entrada.setForeground(new java.awt.Color(153, 0, 51));
-        lb_entrada.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lb_entrada.setText("Nome do Arquivo");
-        lb_entrada.setToolTipText("");
-        lb_entrada.setBorder(new javax.swing.border.MatteBorder(null));
-        lb_entrada.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        lb_analiseLexica.setBackground(new java.awt.Color(102, 102, 0));
-        lb_analiseLexica.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
-        lb_analiseLexica.setForeground(new java.awt.Color(153, 51, 0));
-        lb_analiseLexica.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lb_analiseLexica.setText("Análise Léxica");
-        lb_analiseLexica.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(102, 171, 134)));
 
         btnLimpar.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         btnLimpar.setForeground(new java.awt.Color(153, 0, 51));
@@ -130,53 +137,110 @@ public class Interface extends javax.swing.JFrame {
         textArea2.setRows(5);
         jScrollPane2.setViewportView(textArea2);
 
+        textArea3.setEditable(false);
+        textArea3.setColumns(20);
+        textArea3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        textArea3.setRows(5);
+        jScrollPane3.setViewportView(textArea3);
+
+        lb_entrada1.setBackground(new java.awt.Color(51, 153, 0));
+        lb_entrada1.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        lb_entrada1.setForeground(new java.awt.Color(153, 0, 51));
+        lb_entrada1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lb_entrada1.setText("  Nome do Arquivo");
+        lb_entrada1.setToolTipText("");
+        lb_entrada1.setBorder(new javax.swing.border.MatteBorder(null));
+        lb_entrada1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        lb_analiseLexica1.setBackground(new java.awt.Color(102, 102, 0));
+        lb_analiseLexica1.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
+        lb_analiseLexica1.setForeground(new java.awt.Color(153, 51, 0));
+        lb_analiseLexica1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb_analiseLexica1.setText("Compilador");
+        lb_analiseLexica1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(102, 171, 134)));
+
+        lb_entrada2.setBackground(new java.awt.Color(51, 153, 0));
+        lb_entrada2.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        lb_entrada2.setForeground(new java.awt.Color(153, 0, 51));
+        lb_entrada2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb_entrada2.setText("Lexer");
+        lb_entrada2.setToolTipText("");
+        lb_entrada2.setBorder(new javax.swing.border.MatteBorder(null));
+        lb_entrada2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        lb_entrada3.setBackground(new java.awt.Color(51, 153, 0));
+        lb_entrada3.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        lb_entrada3.setForeground(new java.awt.Color(153, 0, 51));
+        lb_entrada3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb_entrada3.setText("Parser");
+        lb_entrada3.setToolTipText("");
+        lb_entrada3.setBorder(new javax.swing.border.MatteBorder(null));
+        lb_entrada3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lb_analiseLexica, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(lb_entrada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAnexar, javax.swing.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
+                        .addComponent(btnAnexar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnAnalisar1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(lb_entrada2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
+                                    .addComponent(lb_entrada3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(lb_entrada1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(226, Short.MAX_VALUE)))
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(18, Short.MAX_VALUE)
+                    .addComponent(lb_analiseLexica1, javax.swing.GroupLayout.PREFERRED_SIZE, 993, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lb_analiseLexica)
-                .addGap(16, 16, 16)
+                .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAnexar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAnalisar1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lb_entrada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(8, 8, 8)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addGap(16, 16, 16))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lb_entrada2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lb_entrada3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(6, 6, 6)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lb_entrada1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 13, Short.MAX_VALUE))))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(124, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(16, 16, 16)))
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(16, 16, 16)
+                    .addComponent(lb_analiseLexica1)
+                    .addContainerGap(390, Short.MAX_VALUE)))
         );
 
         pack();
@@ -192,16 +256,17 @@ public class Interface extends javax.swing.JFrame {
         File f = chooser.getSelectedFile();
         filePath = f.getAbsolutePath();
         fileName = f.getName();
-        lb_entrada.setText(fileName);
+        lb_entrada1.setText(fileName);
     }//GEN-LAST:event_btnAnexarActionPerformed
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
         // ira apenas apagar o que foi inserido nos resultados
 //        entrada.setText("");
         filePath = "";
-        lb_entrada.setText("Nome do Arquivo");
+        lb_entrada1.setText("Nome do Arquivo");
         textArea1.setText("");
         textArea2.setText("");
+        textArea3.setText("");
     }//GEN-LAST:event_btnLimparActionPerformed
 
     private void btnAnalisar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalisar1ActionPerformed
@@ -266,12 +331,17 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JButton btnAnalisar1;
     private javax.swing.JButton btnAnexar;
     private javax.swing.JButton btnLimpar;
+    private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel lb_analiseLexica;
-    private javax.swing.JLabel lb_entrada;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel lb_analiseLexica1;
+    private javax.swing.JLabel lb_entrada1;
+    private javax.swing.JLabel lb_entrada2;
+    private javax.swing.JLabel lb_entrada3;
     private javax.swing.JTextArea textArea1;
     private javax.swing.JTextArea textArea2;
+    private javax.swing.JTextArea textArea3;
     // End of variables declaration//GEN-END:variables
 }

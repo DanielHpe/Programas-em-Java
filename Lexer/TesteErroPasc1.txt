@@ -7,7 +7,7 @@ program TestePasc1
 
 	{
 		varnum1 = 4; 
-		varnum2 = 6.3;
+		varnum2 = 6.a;
 		varchar1 = 'abc';
 		varchar2 = 'a';
 

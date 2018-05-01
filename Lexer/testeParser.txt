@@ -1,0 +1,7 @@
+program PasC
+
+	char varchar, varchar2
+
+	{
+		read varchar + varchar2;
+	}

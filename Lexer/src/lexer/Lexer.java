@@ -19,11 +19,17 @@ public class Lexer {
     public static int n_column = -1; // contador de linhas
     private RandomAccessFile instance_file; // referencia para o arquivo
     private static TS tabelaSimbolos; // tabela de simbolos
+    private javax.swing.JTextArea textArea1;
+    private javax.swing.JTextArea textArea2;
     
     public String resultado = "";
     public String resultadoLinhasColunas = "";
     
-    public Lexer(String input_data) {
+    public Lexer(TS tS, String input_data) {
+        
+        this.tabelaSimbolos = tS;
+        
+        tabelaSimbolos = new TS();
 		
         // Abre instance_file de input_data
 	try {
@@ -247,7 +253,7 @@ public class Lexer {
 			return new Token(Tag.num_const, lexema.toString(), n_line, n_column);
                     }
                     break;
-		case 14:
+                case 14:
                     if (Character.isLetterOrDigit(c) || c == '_') {
                         lexema.append(c);
 			// Permanece no estado 14
@@ -327,7 +333,7 @@ public class Lexer {
                     else {
                         sinalizaErro("Padrao para double invalido na linha " + n_line + " coluna " + n_column);
                         retornaPonteiro();
-                        return new Token(Tag.num_const, lexema.toString().replace(".", "") , n_line, n_column);
+                        return new Token(Tag.num_const, lexema.toString() , n_line, n_column);
                     }
                     break;
                 case 27:
@@ -369,7 +375,6 @@ public class Lexer {
     public void leituraArquivoToken(javax.swing.JTextArea textArea1, javax.swing.JTextArea textArea2) {
         
 	Token token;
-        tabelaSimbolos = new TS();
         
         n_column = 1;
         n_line = 1;
@@ -400,7 +405,7 @@ public class Lexer {
         
         textArea2.setText(resultado);
         textArea1.setText(resultadoLinhasColunas);
-	fechaArquivo();
+//	fechaArquivo();
         
         //// Imprimir a tabela de simbolos
         //System.out.println("");
