@@ -11,3 +11,4 @@ Repositório
 - Ordenação adicionado
 - Hash adicionado
 - Árvore Trie adicionado
+- Analisador Léxico e Sintático adicionados
