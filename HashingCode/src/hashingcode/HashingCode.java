@@ -25,7 +25,7 @@ public class HashingCode {
     static public String stringGerada;
     static public String novo;
     static public StringBuilder build; 
-    static public String[] hash = new String[13];
+    static public String[] hash;
     static public Scanner input;
     static public String maisUm;
     static public String caracterBuscado;
@@ -79,7 +79,9 @@ public class HashingCode {
         }
         
         stringGerada = build.subSequence(0, 12).toString();
-        System.out.println(stringGerada);
+        System.out.println("String gerada: " + stringGerada);
+        
+        hash = new String[stringGerada.length()];
         insercaoHash(stringGerada);
         
         do{
@@ -98,9 +100,9 @@ public class HashingCode {
                 System.out.println("Caracter não encontrado");
             }
             
-            System.out.print("Deseja buscar outro caracter ? ");
+            System.out.print("Deseja buscar outro caracter ? (yes/no) ");
             maisUm = input.next();
-            while(!maisUm.equals("yes") && !maisUm.equals("no")){
+            while(!maisUm.equalsIgnoreCase("yes") && !maisUm.equalsIgnoreCase("no")){
                 System.out.print("Comando incorreto! Deseja buscar outro caracter? (yes/no): ");
                 maisUm = input.next();
             }
@@ -119,7 +121,7 @@ public class HashingCode {
         int[] vetor = new int[s.length()];
         
         //A chave é a posição do caracter no Alfabeto
-        System.out.println("\n");
+        System.out.print("Vetor (Corresponde a posição das letras no alfabeto) : ");
         for(int i = 0; i < s.length(); i++){
             vetor[i] = alphabet.indexOf(s.charAt(i) + 1);
             System.out.print(vetor[i] + " ");
@@ -145,7 +147,8 @@ public class HashingCode {
             }
         }
         
-        System.out.println("\n");
+        System.out.println("");
+        System.out.print("Hash construída: ");
         for(int i = 0; i < hash.length; i++){
             System.out.print(hash[i] + " ");
         }
@@ -155,7 +158,7 @@ public class HashingCode {
     static public boolean pesquisaHash(String k){
         
         for(int j = 0; j < hash.length; j++){ //Percorrer a Hash em busca do valor desejado
-            if(hash[j].equals(k)){ //Se a Hash na posição j for igual ao valor randomico buscado
+            if(hash[j].equalsIgnoreCase(k)){ //Se a Hash na posição j for igual ao valor randomico buscado
                 return true;
             }
         }
