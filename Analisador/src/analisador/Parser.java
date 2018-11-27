@@ -122,7 +122,7 @@ public class Parser extends ParsingTable {
         String[] splitRegra = regra.split("\\s+");
         
         // Saída completa /* (DESCOMENTAR LINHA ABAIXO)*/
-//        resultadoParser += regra + "\n";
+        resultadoParser += regra + "\n";
         
         for(int i = splitRegra.length - 1; i >= 0; i--){
             String regraAt = splitRegra[i];
