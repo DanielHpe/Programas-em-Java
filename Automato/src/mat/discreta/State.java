@@ -28,8 +28,7 @@ public class State
     * @param accept estado eh de aceitacao
     */
   
-    public State(boolean accept)
-    {
+    public State(boolean accept) {
         this.accept = accept;
         transitions = new HashMap<>();
     }
