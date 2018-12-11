@@ -3,34 +3,36 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package SOOL;
-
-import java.util.ArrayList;
+package sool;
 
 /**
  *
- * @author 18077
+ * @author danih
  */
 public class Livro {
+    
+    private String titulo;
+    private int quantidade;
 
-  private String titulo;
-  private int quantidade;
-
-    public String getTitulo() {
-        return titulo;
+    public Livro(String titulo, int quantidade){
+            this.titulo = titulo;
+            this.quantidade = quantidade;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public String getTitulo(){
+            return titulo;
     }
 
-    public int getQuantidade() {
-        return quantidade;
+    public void setTitulo(String titulo){
+            this.titulo = titulo;
     }
 
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
+    public int getQuantidade(){
+            return quantidade;
     }
-  
-  
+
+    public void setQuantidade(int quantidade){
+            this.quantidade = quantidade;
+    }
+    
 }
